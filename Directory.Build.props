@@ -1,8 +1,10 @@
 <Project>
 
   <PropertyGroup>
-    <Authors>Jimmy Bogard</Authors>
-    <LangVersion>latest</LangVersion>
+    <PackageId>AutoMapper.NETFramework</PackageId>
+    <Version>10.1.1.1</Version>
+    <Authors>YenChung Tsai, Jimmy Bogard</Authors>
+    <Description>A specialized fork of AutoMapper 10.1.1 for .NET Framework 4.8 compatibility.</Description>
     <NoWarn>$(NoWarn);CS1701;CS1702;CS1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Features>strict</Features>

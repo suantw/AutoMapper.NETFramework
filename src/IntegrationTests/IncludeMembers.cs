@@ -421,9 +421,9 @@ namespace AutoMapper.IntegrationTests
         }
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault(), s => s.OtherInnerSources.Select(s=>s).FirstOrDefault());
-            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails).FirstOrDefault()));
-            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSourceDetails.Select(s => s).FirstOrDefault()));
+            cfg.CreateMap<Source, Destination>().IncludeMembers(s => s.InnerSourceWrappers.Select(t => t.InnerSource).FirstOrDefault(), s => s.OtherInnerSources.Select(t=>t).FirstOrDefault());
+            cfg.CreateMap<InnerSource, Destination>(MemberList.None).ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSourceDetailsWrapper.Select(t => t.InnerSourceDetails).FirstOrDefault()));
+            cfg.CreateMap<OtherInnerSource, Destination>(MemberList.None).ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSourceDetails.Select(t => t).FirstOrDefault()));
             cfg.CreateMap<InnerSourceDetails, DestinationDetails>();
             cfg.CreateMap<OtherInnerSourceDetails, OtherDestinationDetails>();
         });
@@ -620,10 +620,10 @@ namespace AutoMapper.IntegrationTests
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>()
-                .ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSources.Select(s => s).FirstOrDefault()))
-                .ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSources.Select(s => s).FirstOrDefault()));
-            cfg.CreateMap<InnerSource, DestinationDetails>().IncludeMembers(s => s.InnerSourceDetails.Select(s => s).FirstOrDefault());
-            cfg.CreateMap<OtherInnerSource, OtherDestinationDetails>().IncludeMembers(s => s.OtherInnerSourceDetails.Select(s => s).FirstOrDefault());
+                .ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSources.Select(t => t).FirstOrDefault()))
+                .ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSources.Select(t => t).FirstOrDefault()));
+            cfg.CreateMap<InnerSource, DestinationDetails>().IncludeMembers(s => s.InnerSourceDetails.Select(t => t).FirstOrDefault());
+            cfg.CreateMap<OtherInnerSource, OtherDestinationDetails>().IncludeMembers(s => s.OtherInnerSourceDetails.Select(t => t).FirstOrDefault());
             cfg.CreateMap<InnerSourceDetails, DestinationDetails>();
             cfg.CreateMap<OtherInnerSourceDetails, OtherDestinationDetails>();
         });
@@ -731,10 +731,10 @@ namespace AutoMapper.IntegrationTests
         protected override MapperConfiguration Configuration => new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<Source, Destination>()
-                .ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSourceWrappers.Select(s => s.InnerSource).FirstOrDefault()))
-                .ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSources.Select(s => s).FirstOrDefault()));
-            cfg.CreateMap<InnerSource, DestinationDetails>().IncludeMembers(s => s.InnerSourceDetailsWrapper.Select(s => s.InnerSourceDetails).FirstOrDefault());
-            cfg.CreateMap<OtherInnerSource, OtherDestinationDetails>().IncludeMembers(s => s.OtherInnerSourceDetails.Select(s => s).FirstOrDefault());
+                .ForMember(d => d.Details, o => o.MapFrom(s => s.InnerSourceWrappers.Select(t => t.InnerSource).FirstOrDefault()))
+                .ForMember(d => d.OtherDetails, o => o.MapFrom(s => s.OtherInnerSources.Select(t => t).FirstOrDefault()));
+            cfg.CreateMap<InnerSource, DestinationDetails>().IncludeMembers(s => s.InnerSourceDetailsWrapper.Select(t => t.InnerSourceDetails).FirstOrDefault());
+            cfg.CreateMap<OtherInnerSource, OtherDestinationDetails>().IncludeMembers(s => s.OtherInnerSourceDetails.Select(t => t).FirstOrDefault());
             cfg.CreateMap<InnerSourceDetails, DestinationDetails>();
             cfg.CreateMap<OtherInnerSourceDetails, OtherDestinationDetails>();
         });

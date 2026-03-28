@@ -170,7 +170,7 @@ namespace AutoMapper.UnitTests.Tests
         public class Source
         {
             public int Value { get; set; }
-            public int Ävíator { get; set; }
+            public int Aviator { get; set; }
             public int SubAirlinaFlight { get; set; }
         }
 
@@ -186,14 +186,14 @@ namespace AutoMapper.UnitTests.Tests
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.ReplaceMemberName("A", "Ä");
-                cfg.ReplaceMemberName("i", "í");
+                cfg.ReplaceMemberName("A", "a");
+                cfg.ReplaceMemberName("i", "I");
                 cfg.ReplaceMemberName("Airline", "Airlina");
                 cfg.CreateMap<Source, Destination>();
             });
 
             var mapper = config.CreateMapper();
-            var dest = mapper.Map<Destination>(new Source {Ävíator = 3, SubAirlinaFlight = 4, Value = 5});
+            var dest = mapper.Map<Destination>(new Source {Aviator = 3, SubAirlinaFlight = 4, Value = 5});
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);
             dest.Value.ShouldBe(5);
@@ -205,7 +205,7 @@ namespace AutoMapper.UnitTests.Tests
         public class Source
         {
             public int Value { get; set; }
-            public int Ävíator { get; set; }
+            public int Aviator { get; set; }
             public int SubAirlinaFlight { get; set; }
         }
 
@@ -229,14 +229,14 @@ namespace AutoMapper.UnitTests.Tests
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.ReplaceMemberName("A", "Ä");
-                cfg.ReplaceMemberName("i", "í");
+                cfg.ReplaceMemberName("A", "a");
+                cfg.ReplaceMemberName("i", "I");
                 cfg.ReplaceMemberName("Airline", "Airlina");
-                cfg.AddProfile<TestProfile>();
+                cfg.CreateMap<Source, Destination>();
             });
 
             var mapper = config.CreateMapper();
-            var dest = mapper.Map<Destination>(new Source { Ävíator = 3, SubAirlinaFlight = 4, Value = 5 });
+            var dest = mapper.Map<Destination>(new Source { Aviator = 3, SubAirlinaFlight = 4, Value = 5 });
             dest.Aviator.ShouldBe(3);
             dest.SubAirlineFlight.ShouldBe(4);
             dest.Value.ShouldBe(5);

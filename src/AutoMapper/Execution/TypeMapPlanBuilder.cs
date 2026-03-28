@@ -120,6 +120,12 @@ namespace AutoMapper.Execution
             {
                 Debug.WriteLine($"Setting PreserveReferences: {_typeMap.SourceType} - {_typeMap.DestinationType} => {memberTypeMap.SourceType} - {memberTypeMap.DestinationType}");
                 memberTypeMap.PreserveReferences = true;
+                // Set a max depth to prevent stack overflow in case of circular references that can't be preserved
+                // Patch for GHSA-rvv3-g6hj-g44x
+                if (memberTypeMap.MaxDepth == 0)
+                {
+                    memberTypeMap.MaxDepth = 64;
+                }
             }
 
             TypeMap ResolveMemberTypeMap(IMemberMap memberMap)

@@ -21,16 +21,16 @@ namespace AutoMapper.UnitTests
 
     public abstract class NonValidatingSpecBase : SpecBase
     {
-        private IMapper mapper;
+        private IMapper mapper { get; set; }
 
         protected abstract MapperConfiguration Configuration { get; }
         protected IConfigurationProvider ConfigProvider => Configuration;
 
-        protected IMapper Mapper => mapper ??= Configuration.CreateMapper();
+        protected IMapper Mapper => mapper == null ? Configuration.CreateMapper() : mapper;
 
         protected TDestination Map<TDestination>(object source) => Mapper.Map<TDestination>(source);
 
-        protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand) => 
+        protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand) =>
             Mapper.ProjectTo(source, parameters, membersToExpand);
 
         protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, IDictionary<string, object> parameters, params string[] membersToExpand) =>
