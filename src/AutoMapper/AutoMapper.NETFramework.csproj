@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Summary>A convention-based object-object mapper.</Summary>
+    <Description>A convention-based object-object mapper.</Description>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>AutoMapper</AssemblyName>
+    <AssemblyOriginatorKeyFile>..\..\AutoMapper.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>AutoMapper</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageProjectUrl>https://automapper.org</PackageProjectUrl>
+
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <BaselineAllAPICompatError>true</BaselineAllAPICompatError>
+    <AdditionalApiCompatOptions>--exclude-non-browsable --exclude-compiler-generated</AdditionalApiCompatOptions>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ResolvedMatchingContract Include="..\LastMajorVersionBinary\AutoMapper.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MinVer" Version="2.3.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.DotNet.ApiCompat" Version="5.0.0-beta.20262.5" PrivateAssets="All" />  
+  </ItemGroup>
+
+  <Target Name="PreBuild" AfterTargets="GetAssemblyVersion">
+    <Exec Command="powershell -ExecutionPolicy Unrestricted -File &quot;$(ProjectDir)\PreBuild.ps1&quot; -version $(Version)" />
+  </Target>
+
+</Project>
